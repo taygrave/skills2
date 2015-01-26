@@ -78,7 +78,7 @@ def common_items(list1, list2):
     For example:
 
         >>> sorted(common_items([1, 2, 3, 4], [1, 2]))
-        [1, 2]
+        [1, 1, 2, 2]
 
     If an item appears more than once in both lists, return it each
     time:
@@ -92,8 +92,17 @@ def common_items(list1, list2):
         [1, 1, 2, 2]
 
     """
+    list_all = []
 
-    return []
+    for num in list1:
+        if list2.count(num) != 0 and list_all.count(num) == 0:
+            list_all.append(num)
+
+    for num in list2:
+        if list_all.count(num) == 1:
+            list_all.append(num)
+
+    return list_all
 
 
 def unique_common_items(list1, list2):
@@ -117,8 +126,8 @@ def unique_common_items(list1, list2):
         [1, 2]
 
     """
-
-    return []
+    list_all = [num for num in list1 if num in list2]
+    return list_all
 
 
 def sum_zero(list1):
@@ -146,9 +155,16 @@ def sum_zero(list1):
         [[-2, 2], [-1, 1], [0, 0]]
 
     """
+    dict_pair = {}
 
-    return []
+    for i in range(len(list1) - 1):
+        for num in list1:
+            pair = (list1[i], num)
+            tuple_new = tuple(sorted(pair))
+            if sum(tuple_new) == 0:
+                dict_pair[tuple_new] = sum(tuple_new)
 
+    return dict_pair.keys()
 
 def find_duplicates(words):
     """Given a list of words, return the list with duplicates removed.
@@ -166,8 +182,10 @@ def find_duplicates(words):
         ['Rose', 'a', 'is', 'rose']
 
     """
+    set_nodups = set(words)
+    list_nodups = sorted(list(set_nodups))
 
-    return []
+    return list_nodups
 
 
 def word_length(words):
