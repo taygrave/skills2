@@ -201,8 +201,21 @@ def word_length(words):
         [(1, ['a']), (2, ['ok', 'an']), (3, ['day']), (5, ['apple'])]
 
     """
+    
+    dict_len = {}
+    list_dictvals = []
 
-    return []
+    for word in words:
+        if len(word) not in dict_len:
+            dict_len[len(word)] = [word]
+        else:
+            dict_len[len(word)] += [word]
+
+    for k, v in dict_len.items():
+        tuple_new = (k, v)
+        list_dictvals.append(tuple_new)
+
+    return list_dictvals
 
 
 def adv_word_length_sorted_words(words):
@@ -220,7 +233,24 @@ def adv_word_length_sorted_words(words):
 
     """
 
-    return []
+    dict_len = {}
+    list_dictvals = []
+
+    for word in words:
+        if len(word) not in dict_len:
+            dict_len[len(word)] = [word]
+        else:
+            dict_len[len(word)] += [word]
+        val = dict_len[len(word)]
+        newval = sorted(val)
+        dict_len[len(word)] = newval       
+
+
+    for k, v in dict_len.items():
+        tuple_new = (k, v)
+        list_dictvals.append(tuple_new)
+
+    print list_dictvals
 
 
 def pirate_talk(phrase):
@@ -265,8 +295,29 @@ def pirate_talk(phrase):
         'me swabbie be not a man!'
 
     """
+    # #I did this on my own computer, printing the result and then making that a dictionary right in my code here
+    # #did have a problem with spaced words like 'foul blaggart' though 
+    # file1 = open("tanslator.txt")
+    # dict_pirate = {}
 
-    return ""
+    ##making a dictionary out of the words in the text file
+
+    # for line in file1:        
+    #     words = line.strip().split()
+    #     dict_pirate[words[0]] = words[1]
+    
+    dict_pirate = {'madam': 'proud beauty', 'boy': 'matey', 'lawyer': 'foul blaggart', 'sir': 'matey', 'students': 'swabbies', 'hello': 'avast', 'professor': 'foul blaggart', 'hotel': 'fleabag inn', 'restroom': 'head', 'excuse': 'arr', 'are': 'be', 'student': 'swabbie', 'the': "th'", 'man': 'matey', 'my': 'me', 'your': 'yer', 'is': 'be', 'restaurant': 'galley'}
+
+    phrase_list = phrase.split()
+
+    for item in range(len(phrase_list)):
+        piword = dict_pirate.get(phrase_list[item], phrase_list[item])
+        phrase_list[item] = piword
+        
+
+    pispeak = " ".join(phrase_list)
+    
+    return pispeak
 
 
 ##############################################################################
